@@ -27,7 +27,7 @@ $send_to = ["223074836"];
 if ($data -> state -> onEmpty) {
 	echo "Кормушка пустая";
 	foreach ($send_to as $chatId) {
-		$tg_bot -> sendMessage($chatId, "Кормушка пустая!")
+		$tg_bot -> sendMessage($chatId, "Кормушка пустая!");
 	}
 } else {
 	echo "Все ОК";
