@@ -1,0 +1,3 @@
+#!/bin/bash
+
+php /var/www/u1022297/data/www/shinesquad.ru/kormuska_server/index.php 
