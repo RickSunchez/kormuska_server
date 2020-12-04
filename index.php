@@ -22,7 +22,6 @@ $data = json_decode($resp);
 
 
 $tg_bot  = new TelegramBot($TG_KEY);
-$send_to = ["223074836"];
 
 $cfg = json_decode(file_get_contents("config"));
 
@@ -53,9 +52,14 @@ if ($data -> state -> onEmpty) {
 		foreach ($send_to as $chatId) {
 			// $tg_bot -> sendMessage($chatId, "Кормушка загружена!");
 		}
+
+		$saved_state = 0;
 	}
 	echo "Все ОК";
 }
 
 $cfg -> users = $send_to;
+$cfg -> saved_state = $saved_state;
+
+file_put_contents("config", json_encode($cfg));
 ?>
