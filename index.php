@@ -24,13 +24,38 @@ $data = json_decode($resp);
 $tg_bot  = new TelegramBot($TG_KEY);
 $send_to = ["223074836"];
 
-if ($data -> state -> onEmpty) {
-	echo "Кормушка пустая";
-	foreach ($send_to as $chatId) {
-		$tg_bot -> sendMessage($chatId, "Кормушка пустая!");
+$cfg = json_decode(file_get_contents("config"));
+
+$send_to = $cfg -> users;
+$saved_state = $cfg -> saved_state;
+
+$tg_data = json_decode(file_get_contents('php://input'), true);
+$chat_id = $tg_data["message"]["chat"]["id"];
+$text = $tg_data["message"]["text"];
+
+if ($chat_id && $text=="/start") {
+	if (!in_array("$chat_id", $send_to)) {
+		$send_to[] = "$chat_id";
 	}
+}
+
+if ($data -> state -> onEmpty) {
+	if ($saved_state == 0) {
+		foreach ($send_to as $chatId) {
+			// $tg_bot -> sendMessage($chatId, "Кормушка пустая!");
+		}
+
+		$saved_state = 1;
+	}
+	
 } else {
+	if ($saved_state == 1) {
+		foreach ($send_to as $chatId) {
+			// $tg_bot -> sendMessage($chatId, "Кормушка загружена!");
+		}
+	}
 	echo "Все ОК";
 }
 
+$cfg -> users = $send_to;
 ?>

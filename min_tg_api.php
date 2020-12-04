@@ -42,4 +42,5 @@
 	}
 
 	// bind site:
+	// https://api.telegram.org/bot<ACCESS_TOKEN>/setWebhook?url=<URL>
 ?>
