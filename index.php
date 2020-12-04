@@ -41,7 +41,7 @@ if ($chat_id && $text=="/start") {
 if ($data -> state -> onEmpty) {
 	if ($saved_state == 0) {
 		foreach ($send_to as $chatId) {
-			// $tg_bot -> sendMessage($chatId, "Кормушка пустая!");
+			$tg_bot -> sendMessage($chatId, "Кормушка пустая!");
 		}
 
 		$saved_state = 1;
@@ -50,7 +50,7 @@ if ($data -> state -> onEmpty) {
 } else {
 	if ($saved_state == 1) {
 		foreach ($send_to as $chatId) {
-			// $tg_bot -> sendMessage($chatId, "Кормушка загружена!");
+			$tg_bot -> sendMessage($chatId, "Кормушка загружена!");
 		}
 
 		$saved_state = 0;
